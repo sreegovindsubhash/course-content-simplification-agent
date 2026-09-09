@@ -1,0 +1,401 @@
+/* ============================================================
+   Course Content Simplification Agent — stylesheet
+   No external fonts or CDN links. Uses the system font stack.
+   ============================================================ */
+
+/* ── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #1f2328;
+  background: #f4f6fb;
+  padding: 0 0 3rem;
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Hero / Header ────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #0f2644 0%, #1a56a0 100%);
+  padding: 3rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.hero-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.75rem;
+}
+
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 99px;
+}
+
+/* ── Card (shared by form, error, result) ─────────────────── */
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Form elements ────────────────────────────────────────── */
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+  margin-top: 1rem;
+  color: #1f2328;
+}
+
+label:first-child {
+  margin-top: 0;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  resize: vertical;
+  background: #fafafa;
+  color: #1f2328;
+  transition: border-color 0.15s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #1a56a0;
+  background: #ffffff;
+}
+
+/* ── Form card accent ─────────────────────────────────────── */
+.form-card {
+  border-top: 3px solid #1a56a0;
+  box-shadow: 0 2px 12px rgba(15, 38, 68, 0.08);
+}
+
+/* ── Select wrapper + custom chevron ──────────────────────── */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #1a56a0;
+  pointer-events: none;
+}
+
+select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.6rem 2.5rem 0.6rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  border: 1px solid #c9d5e8;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1f2328;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+select:focus {
+  outline: none;
+  border-color: #1a56a0;
+  box-shadow: 0 0 0 3px rgba(26, 86, 160, 0.15);
+}
+
+/* ── Primary button ───────────────────────────────────────── */
+.btn-primary {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #1a56a0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover {
+  background: #0f3d7a;
+}
+
+.btn-primary:disabled {
+  background: #7aabda;
+  cursor: not-allowed;
+}
+
+/* ── Helper text ──────────────────────────────────────────── */
+.helper-text {
+  font-size: 0.82rem;
+  color: #57606a;
+  font-style: italic;
+  margin-top: 0.35rem;
+}
+
+/* ── Error card ───────────────────────────────────────────── */
+.card-error {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  border-left: 4px solid #b91c1c;
+}
+
+.card-error h2 {
+  color: #b91c1c;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-error p {
+  font-size: 0.9rem;
+  color: #1f2328;
+  margin-bottom: 0.35rem;
+}
+
+/* ── Result card (outer wrapper) ──────────────────────────── */
+.card-result {
+  background: #ffffff;
+  border-color: #d0daea;
+  box-shadow: 0 4px 20px rgba(15, 38, 68, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Result sub-cards ─────────────────────────────────────── */
+.result-card {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #1a56a0;
+}
+
+.result-card--explanation {
+  border-left-color: #1a56a0;
+}
+
+.result-card--concepts {
+  border-left-color: #3b5bdb;
+}
+
+.result-card--keypoints {
+  border-left-color: #1e2e4a;
+}
+
+.result-card--summary {
+  border-left-color: #374151;
+}
+
+/* ── Result card header row ───────────────────────────────── */
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.result-header h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2328;
+}
+
+/* ── Level badge ──────────────────────────────────────────── */
+.level-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1a56a0;
+  background: #dce8f7;
+  border-radius: 99px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ── Result body text ─────────────────────────────────────── */
+.result-body {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #1f2328;
+  white-space: pre-wrap;
+}
+
+/* ── Sub-card section titles ──────────────────────────────── */
+.result-card-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #57606a;
+  margin-bottom: 0.65rem;
+}
+
+/* ── Concept pill tags ────────────────────────────────────── */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.concept-tag {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #1a3a6b;
+  background: #dce8f7;
+  border: 1px solid #b8d0ef;
+  border-radius: 99px;
+}
+
+/* ── Checkmark bullet list ────────────────────────────────── */
+.check-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.check-list li {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #1f2328;
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: 0.3rem;
+}
+
+.check-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #1a56a0;
+  font-weight: 700;
+}
+
+/* ── Summary text ─────────────────────────────────────────── */
+.summary-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #1f2328;
+  font-style: italic;
+}
+
+/* ── Utility ──────────────────────────────────────────────── */
+.muted {
+  color: #57606a;
+  font-size: 0.85rem;
+}
+
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.85em;
+  background: #f0f0f0;
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+.site-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid #d0daea;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #57606a;
+}
+
+/* ── Responsive — mobile (≤ 600 px) ──────────────────────── */
+@media (max-width: 600px) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .container {
+    padding: 1.25rem 1rem;
+  }
+
+  .card {
+    padding: 1.1rem 1rem;
+  }
+
+  .result-card {
+    padding: 0.9rem 1rem;
+  }
+
+  .tag-list {
+    gap: 0.4rem;
+  }
+
+  .btn-primary {
+    font-size: 0.95rem;
+  }
+}
