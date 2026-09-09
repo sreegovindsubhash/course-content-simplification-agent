@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Content Simplification Agent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <!-- ── Header (full-bleed, outside .container) ───────────── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>🎓 Course Content Simplification Agent</h1>
+      <p class="subtitle">Paste any academic content and get an instant, level-appropriate explanation.</p>
+      <div class="hero-badges">
+        <span class="hero-badge">IBM Granite</span>
+        <span class="hero-badge">IBM watsonx.ai</span>
+        <span class="hero-badge">AICTE 2026 · #24</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ── Input form ─────────────────────────────────────────── -->
+    <section class="card form-card">
+      <form action="/simplify" method="POST" id="simplify-form">
+
+        <label for="content">Paste your course content here</label>
+        <textarea
+          id="content"
+          name="content"
+          rows="10"
+          placeholder="e.g. a paragraph from a textbook, lecture notes, or any academic text…"
+          required
+        >{{ original_content or '' }}</textarea>
+        <p class="helper-text">Supports lecture notes, textbook paragraphs, slides, or any academic text.</p>
+
+        <label for="level">Learner level</label>
+        <div class="select-wrapper">
+          <select id="level" name="level">
+            <option value="Beginner"      {% if selected_level == 'Beginner'      %}selected{% endif %}>Beginner</option>
+            <option value="Intermediate"  {% if selected_level == 'Intermediate'  %}selected{% endif %}>Intermediate</option>
+            <option value="Advanced"      {% if selected_level == 'Advanced'      %}selected{% endif %}>Advanced</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submit-btn">Simplify</button>
+
+      </form>
+    </section>
+
+    <!-- ── Error message (shown only when the API call fails) ─── -->
+    {% if error %}
+    <section class="card card-error">
+      <h2>⚠️ Something went wrong</h2>
+      <p>{{ error }}</p>
+      <p class="muted">
+        Check that your <code>.env</code> file contains valid credentials and
+        that your IBM Cloud account is active.
+      </p>
+    </section>
+    {% endif %}
+
+    <!-- ── Result (shown only after a successful simplification) ─ -->
+    {% if result %}
+    <section class="card card-result">
+
+      <!-- Simplified Explanation sub-card -->
+      <div class="result-card result-card--explanation">
+        <div class="result-header">
+          <h2>Simplified Explanation</h2>
+          <span class="level-badge">{{ selected_level }}</span>
+        </div>
+        <p class="result-body">{{ result }}</p>
+      </div>
+
+      <!-- Key Concepts sub-card -->
+      {% if concepts %}
+      <div class="result-card result-card--concepts">
+        <h3 class="result-card-title">Key Concepts</h3>
+        <div class="tag-list">
+          {% for item in concepts %}
+          <span class="concept-tag">{{ item }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Key Points sub-card -->
+      {% if key_points %}
+      <div class="result-card result-card--keypoints">
+        <h3 class="result-card-title">Key Points to Remember</h3>
+        <ul class="check-list">
+          {% for item in key_points %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <!-- Summary sub-card -->
+      {% if summary %}
+      <div class="result-card result-card--summary">
+        <h3 class="result-card-title">Quick Summary</h3>
+        <p class="summary-text">{{ summary }}</p>
+      </div>
+      {% endif %}
+
+    </section>
+    {% endif %}
+
+  </div><!-- /.container -->
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Powered by <strong>IBM Granite</strong> via <strong>IBM watsonx.ai</strong> &nbsp;·&nbsp; AICTE 2026 &nbsp;·&nbsp; Problem Statement #24</p>
+  </footer>
+
+  <!-- ── Inline script: disable button while form submits ──────── -->
+  <script>
+    document.getElementById('simplify-form').addEventListener('submit', function () {
+      var btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Generating…';
+    });
+  </script>
+
+</body>
+</html>
